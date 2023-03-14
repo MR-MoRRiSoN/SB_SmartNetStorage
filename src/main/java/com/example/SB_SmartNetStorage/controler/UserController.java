@@ -19,7 +19,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/user")
+    @PostMapping("/addUser")
     User newUser(@RequestBody User newUSer) {
         return userRepository.save(newUSer);
     }
@@ -82,14 +82,17 @@ public class UserController {
 
 
     @PostMapping("/logIn/{nik}/{passwd}")
-    Boolean getUserByMail(@PathVariable String nik,@PathVariable String passwd){
+    User getUserByMail(@PathVariable String nik,@PathVariable String passwd){
 
         List<User> user = userRepository.findByUserLogInNickname(nik);
 
         if (user.isEmpty()){
-            return false;
+            return null;
         }
-        return user.get(0).getUserPassword().equals(passwd);
+        if (user.get(0).getUserPassword().equals(passwd)){
+           return user.get(0);
+        }
+        return null;
     }
 
 

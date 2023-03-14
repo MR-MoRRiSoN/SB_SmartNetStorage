@@ -3,7 +3,6 @@ package com.example.SB_SmartNetStorage.controler;
 import com.example.SB_SmartNetStorage.exception.NotFoundException;
 import com.example.SB_SmartNetStorage.model.Product;
 import com.example.SB_SmartNetStorage.repository.ProductRepository;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +20,13 @@ public class ProductController {
 
     @GetMapping("/getProduct")
     List<Product> getAllProduct(){return productRepository.findAll();}
+
+    @GetMapping("/checkSerial/{serial}")
+    List<Product> getAllProductSerial(@PathVariable Boolean serial){return productRepository.findByCheckSerial(serial);}
+
+
+    @GetMapping("/getCollapse")
+    List<String> getCollapse(){return productRepository.findDistinctProductTypes();}
 
     @GetMapping("/getProduct/{id}")
     Product getUserById(@PathVariable Long id){

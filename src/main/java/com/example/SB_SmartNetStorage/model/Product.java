@@ -34,7 +34,7 @@ public class Product {
     private Date incomeDate;
     private String status;
     private Integer quantity;
-    private boolean checkSerial;
+    private Boolean checkSerial;
 
 
 
